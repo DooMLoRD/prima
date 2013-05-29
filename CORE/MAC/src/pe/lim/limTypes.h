@@ -746,6 +746,10 @@ void limSendSmeMgmtTXCompletion(tpAniSirGlobal pMac,
                                 tpPESession psessionEntry,
                                 tANI_U32 txCompleteStatus);
 tSirRetStatus limDeleteTDLSPeers(tpAniSirGlobal pMac, tpPESession psessionEntry);
+#ifdef FEATURE_WLAN_TDLS_OXYGEN_DISAPPEAR_AP
+void limTDLSDisappearAPTrickInd(tpAniSirGlobal pMac, tpDphHashNode pStaDs, tpPESession psessionEntry);
+int limGetTDLSPeerCount(tpAniSirGlobal pMac, tpPESession psessionEntry);
+#endif
 eHalStatus limProcessTdlsAddStaRsp(tpAniSirGlobal pMac, void *msg, tpPESession);
 tSirRetStatus limSendTdlsTeardownFrame(tpAniSirGlobal pMac,
            tSirMacAddr peerMac, tANI_U16 reason, tANI_U8 responder, tpPESession psessionEntry,
@@ -836,6 +840,8 @@ void limSendHalEndScanReq( tpAniSirGlobal, tANI_U8, tLimLimHalScanState);
 void limSendHalFinishScanReq( tpAniSirGlobal, tLimLimHalScanState);
 
 void limContinuePostChannelScan(tpAniSirGlobal pMac);
+void limCovertChannelScanType(tpAniSirGlobal pMac,tANI_U8 channelNum, tANI_BOOLEAN passiveToActive);
+void limSetDFSChannelList(tpAniSirGlobal pMac,tANI_U8 channelNum, tSirDFSChannelList *dfsChannelList);
 void limContinueChannelLearn( tpAniSirGlobal );
 //WLAN_SUSPEND_LINK Related
 tANI_U8 limIsLinkSuspended(tpAniSirGlobal pMac);
@@ -1066,6 +1072,7 @@ void limSendSmeMgmtFrameInd(
                     tANI_S8 rxRssi);
 void limProcessRemainOnChnTimeout(tpAniSirGlobal pMac);
 void limProcessInsertSingleShotNOATimeout(tpAniSirGlobal pMac);
+void limConvertActiveChannelToPassiveChannel(tpAniSirGlobal pMac);
 void limSendP2PActionFrame(tpAniSirGlobal pMac, tpSirMsgQ pMsg);
 void limAbortRemainOnChan(tpAniSirGlobal pMac);
 tSirRetStatus __limProcessSmeNoAUpdate(tpAniSirGlobal pMac, tANI_U32 *pMsgBuf);

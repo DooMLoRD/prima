@@ -131,7 +131,7 @@
 #define WAIT_TIME_TDLS_MGMT         11000
 
 /** Maximum time(ms) to wait for tdls initiator to start direct communication **/
-#define WAIT_TIME_TDLS_INITIATOR    300
+#define WAIT_TIME_TDLS_INITIATOR    600
 /* Maximum time to get crda entry settings */
 #define CRDA_WAIT_TIME 300
 
@@ -165,6 +165,9 @@
 #define WLAN_HDD_P2P_SOCIAL_CHANNELS 3
 #define WLAN_HDD_P2P_SINGLE_CHANNEL_SCAN 1
 
+#define WLAN_HDD_IS_SOCIAL_CHANNEL(center_freq) \
+(((center_freq) == 2412) || ((center_freq) == 2437) || ((center_freq) == 2462))
+
 #ifdef WLAN_FEATURE_11W
 #define WLAN_HDD_SA_QUERY_ACTION_FRAME 8
 #endif
@@ -184,6 +187,9 @@
 #define GTK_OFFLOAD_ENABLE  0
 #define GTK_OFFLOAD_DISABLE 1
 #endif
+
+#define HDD_MAC_ADDR_LEN    6
+typedef v_U8_t tWlanHddMacAddr[HDD_MAC_ADDR_LEN];
 
 typedef struct hdd_tx_rx_stats_s
 {
@@ -276,6 +282,12 @@ typedef struct roaming_info_s
 {
    HDD_ROAM_STATE roamingState;
    vos_event_t roamingEvent;
+
+   tWlanHddMacAddr bssid;
+   tWlanHddMacAddr peerMac;
+   tANI_U32 roamId;
+   eRoamCmdStatus roamStatus;
+   v_BOOL_t deferKeyComplete;
    
 } roaming_info_t;
 
@@ -536,6 +548,8 @@ struct hdd_station_ctx
 #ifdef WLAN_FEATURE_GTK_OFFLOAD
    hddGtkOffloadParams gtkOffloadRequestParams;
 #endif
+   /*Increment whenever ibss New peer joins and departs the network */
+   int ibss_sta_generation;
 };
 
 #define BSS_STOP    0 
