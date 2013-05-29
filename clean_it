@@ -1,0 +1,1 @@
+CROSS_COMPILE=~/arm-linux-androideabi-4.7/bin/arm-linux-androideabi- ARCH=arm make clean -C ~/android/sony_apq8064_kernel/android_kernel_sony_apq8064 M=$PWD CONFIG_PRIMA_WLAN=m CONFIG_PRIMA_WLAN_LFR=y KERNEL_BUILD=1 WLAN_ROOT=$PWD
