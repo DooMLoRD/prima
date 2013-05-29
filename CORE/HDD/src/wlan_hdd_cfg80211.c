@@ -6372,20 +6372,20 @@ static int wlan_hdd_cfg80211_get_station(struct wiphy *wiphy, struct net_device 
         {
             sinfo->txrate.mcs    = maxMCSIdx;
 #ifdef WLAN_FEATURE_11AC
-            sinfo->txrate.nss = 1;
+            //sinfo->txrate.nss = 1;
             if (rate_flags & eHAL_TX_RATE_VHT80)
             {
-                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
-                sinfo->txrate.flags |= RATE_INFO_FLAGS_80_MHZ_WIDTH;
+//                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
+//                sinfo->txrate.flags |= RATE_INFO_FLAGS_80_MHZ_WIDTH;
             }
             else if (rate_flags & eHAL_TX_RATE_VHT40)
             {
-                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
+//                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
                 sinfo->txrate.flags |= RATE_INFO_FLAGS_40_MHZ_WIDTH;
             }
             else if (rate_flags & eHAL_TX_RATE_VHT20)
             {
-                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
+//                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
             }
 #endif /* WLAN_FEATURE_11AC */
             if (rate_flags & (eHAL_TX_RATE_HT20 | eHAL_TX_RATE_HT40))
@@ -6425,10 +6425,10 @@ static int wlan_hdd_cfg80211_get_station(struct wiphy *wiphy, struct net_device 
             //must be MCS
             sinfo->txrate.mcs = pAdapter->hdd_stats.ClassA_stat.mcs_index;
 #ifdef WLAN_FEATURE_11AC
-            sinfo->txrate.nss = 1;
+            //sinfo->txrate.nss = 1;
             if (rate_flags & eHAL_TX_RATE_VHT80)
             {
-                sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
+            //    sinfo->txrate.flags |= RATE_INFO_FLAGS_VHT_MCS;
             }
             else
 #endif /* WLAN_FEATURE_11AC */
@@ -6446,7 +6446,7 @@ static int wlan_hdd_cfg80211_get_station(struct wiphy *wiphy, struct net_device 
 #ifdef WLAN_FEATURE_11AC
             else if (rate_flags & eHAL_TX_RATE_VHT80)
             {
-                sinfo->txrate.flags |= RATE_INFO_FLAGS_80_MHZ_WIDTH;
+             //   sinfo->txrate.flags |= RATE_INFO_FLAGS_80_MHZ_WIDTH;
             }
 #endif /* WLAN_FEATURE_11AC */
 #ifdef LINKSPEED_DEBUG_ENABLED
